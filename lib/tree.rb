@@ -40,4 +40,15 @@ class BinarySearchTree
     @size += 1
     return @all_nodes.last.depth
   end
+
+  def include?(value)
+    @all_nodes.each do |node|
+      if node.value == value
+        return true
+      else
+        return false
+      end
+    end
+  end
+
 end
