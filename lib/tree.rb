@@ -77,14 +77,21 @@ class BinarySearchTree
     min
     @sorted_array = []
     @sorted_array << {min.movie => min.value}
-    while min.right != nil
-      next_min = min.right
-      if next_min.left == nil #terminal point
+    lower_node = min
+    while lower_node.right != nil #values below, cant be values to left of min
+      next_min = lower_node.right
+      if next_min.left == nil #terminal point on left
         @sorted_array << {next_min.movie => next_min.value}
-        break
-      end
+        lower_node = next_min
+        # continue to check right
+      elsif lower_node.left != nil #if nodes to left
+        next_min = lower_node.left
+        if next_min.left == nil # terminal on left
+          @sorted_array << {next_min.movie => next_min.value}
+        end
     end
     return @sorted_array
   end
 
+end
 end
