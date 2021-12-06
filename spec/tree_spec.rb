@@ -22,4 +22,12 @@ RSpec.describe BinarySearchTree do
     @tree.insert(30, 'Space Jam')
     expect(@tree.all_nodes.last.parent.value).to eq(40)
   end
+  it 'will add the right and left node information to new nodes' do
+    @tree.insert(50, 'Mission Impossible')
+    @tree.insert(90, '12 angry men')
+    expect(@tree.all_nodes[-3].right.name).to eq('12 angry men')
+    # right of 'A beautiful mind is '12 angry men'
+    expect(@tree.all_nodes[-3].left.value).to eq(50)
+    # left of 'A beautiful mind is Mission Impossible'
+  end
 end
