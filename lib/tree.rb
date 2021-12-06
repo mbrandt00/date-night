@@ -1,5 +1,5 @@
 class BinarySearchTree
-  attr_reader :root, :all_nodes
+  attr_reader :root, :all_nodes, :sorted_array
   def initialize()
     @root = nil
     @size = 0
@@ -26,11 +26,13 @@ class BinarySearchTree
       end
       if value < previous_node.value #setting new node from terminal point
         previous_node.left = Node.new(value, movie)
+        # previous_node.child = previous_node.left
         previous_node.left.parent = previous_node
         previous_node.left.depth = depth_counter
         @all_nodes << previous_node.left
       else
         previous_node.right = Node.new(value, movie)
+        # previous_node.child = previous_node.left
         previous_node.right.parent = previous_node
         previous_node.right.depth = depth_counter
         @all_nodes << previous_node.right
@@ -58,17 +60,31 @@ class BinarySearchTree
       previous_node = current_node
       current_node = current_node.right
     end
-    return {previous_node.movie => previous_node.value}
+    return previous_node
   end
 
-  def min
-    current_node = @root
-    previous_node = @root
+  def min(node = @root)
+    current_node = node
+    previous_node = node
     while current_node != nil
       previous_node = current_node
       current_node = current_node.left
     end
-    return {previous_node.movie => previous_node.value}
+    return previous_node
+  end
+
+  def sort
+    min
+    @sorted_array = []
+    @sorted_array << {min.movie => min.value}
+    while min.right != nil
+      next_min = min.right
+      if next_min.left == nil #terminal point
+        @sorted_array << {next_min.movie => next_min.value}
+        break
+      end
+    end
+    return @sorted_array
   end
 
 end
