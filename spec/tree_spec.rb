@@ -40,9 +40,15 @@ RSpec.describe BinarySearchTree do
     end
   end
 
-  describe 'Max' do
+  describe 'Max/Min' do
     it 'will return the max value in the tree' do
       expect(@tree.max).to eq({'A Beautiful Mind' => 80})
+    end
+    it 'will return the min value in the tree' do
+      @tree.insert(15, 'Jumanji')
+      @tree.insert(20, 'Jason Bourne')
+      @tree.insert(1, 'Angry Birds the movie')
+      expect(@tree.min).to eq({'Angry Birds the movie' => 1})
     end
   end
 end
