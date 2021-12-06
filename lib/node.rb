@@ -1,5 +1,5 @@
 class Node
-  attr_accesor :value, :movie, :left, :right, :depth, :parent 
+  attr_accessor :value, :movie, :left, :right, :depth, :parent
   def initialize(value, movie)
     @value = value
     @movie = movie
