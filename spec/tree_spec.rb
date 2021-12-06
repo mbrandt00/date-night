@@ -39,4 +39,10 @@ RSpec.describe BinarySearchTree do
       expect(@tree.include?(10)).to be(false)
     end
   end
+
+  describe 'Max' do
+    it 'will return the max value in the tree' do
+      expect(@tree.max).to eq({'A Beautiful Mind' => 80})
+    end
+  end
 end
