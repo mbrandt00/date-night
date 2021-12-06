@@ -1,4 +1,5 @@
 class BinarySearchTree
+  attr_reader :root, :all_nodes
   def initialize()
     @root = nil
     @size = 0
@@ -7,7 +8,7 @@ class BinarySearchTree
 
   def insert(value, movie)
     if @root == nil #initial root
-      @root = TreeNode.new(value, movie)
+      @root = Node.new(value, movie)
       @all_nodes << @root
     else
       current_node = @root
@@ -24,11 +25,13 @@ class BinarySearchTree
         depth_counter += 1
       end
       if value < previous_node.value #setting new node from terminal point
-        previous_node.left = TreeNode.new(value, movie, @parent = previous_node)
+        previous_node.left = Node.new(value, movie)
+        previous_node.left.parent = previous_node
         previous_node.left.depth = depth_counter
         @all_nodes << previous_node.left
       else
-        previous_node.right = TreeNode.new(value, movie, @parent = previous_node)
+        previous_node.right = Node.new(value, movie)
+        previous_node.right.parent = previous_node
         previous_node.right.depth = depth_counter
         @all_nodes << previous_node.right
 
@@ -37,6 +40,4 @@ class BinarySearchTree
     @size += 1
     return @all_nodes.last.depth
   end
-
-
 end
