@@ -61,4 +61,14 @@ class BinarySearchTree
     return {previous_node.movie => previous_node.value}
   end
 
+  def min
+    current_node = @root
+    previous_node = @root
+    while current_node != nil
+      previous_node = current_node
+      current_node = current_node.left
+    end
+    return {previous_node.movie => previous_node.value}
+  end
+
 end
