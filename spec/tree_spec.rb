@@ -42,13 +42,33 @@ RSpec.describe BinarySearchTree do
 
   describe 'Max/Min' do
     it 'will return the max value in the tree' do
-      expect(@tree.max).to eq({'A Beautiful Mind' => 80})
+      expect(@tree.max.value).to eq(80)
     end
     it 'will return the min value in the tree' do
       @tree.insert(15, 'Jumanji')
       @tree.insert(20, 'Jason Bourne')
       @tree.insert(1, 'Angry Birds the movie')
-      expect(@tree.min).to eq({'Angry Birds the movie' => 1})
+      expect(@tree.min.value).to eq(1)
+    end
+  end
+  describe 'Sort' do
+    before(:each) do
+      @tree.insert(20, 'The Conjuring')
+      @tree.insert(50, 'Mission Impossible')
+      @tree.insert(90, 'Shawshank Redemption')
+      @tree.insert(70, 'A Song to Remember')
+      @tree.insert(15, "Dude Where's My Car?")
+      @tree.insert(13, 'Chipwrecked')
+      @tree.insert(17, 'The Sequel')
+      @tree.insert(14, 'Train to Busan')
+    end
+    it 'will start with the minimum value in tree' do
+      @tree.sort
+      expect(@tree.sorted_array.first).to eq({'Chipwrecked' => 13})
+    end
+    it 'will record the second value' do
+      @tree.sort
+      expect(@tree.sorted_array[1]).to eq({'Train to Busan' => 14})
     end
   end
 end
