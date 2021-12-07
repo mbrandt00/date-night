@@ -61,14 +61,34 @@ RSpec.describe BinarySearchTree do
       @tree.insert(13, 'Chipwrecked')
       @tree.insert(17, 'The Sequel')
       @tree.insert(14, 'Train to Busan')
+      @tree.sort
     end
     it 'will start with the minimum value in tree' do
-      @tree.sort
       expect(@tree.sorted_array.first).to eq({'Chipwrecked' => 13})
     end
     it 'will record the second value' do
-      @tree.sort
       expect(@tree.sorted_array[1]).to eq({'Train to Busan' => 14})
+    end
+    it 'will record the third value' do
+      expect(@tree.sorted_array[2]).to eq({"Dude Where's My Car?" => 15})
+    end
+    it 'will record the fourth value' do
+      expect(@tree.sorted_array[3]).to eq({'The Sequel' => 17})
+    end
+    it 'will record the fifth value' do
+      expect(@tree.sorted_array[4]).to eq({'The Conjuring' => 20})
+    end
+    it 'will record the sixth value' do
+      expect(@tree.sorted_array[5]).to eq({'Jack and Jill' => 40})
+    end
+    it 'will record the seventh value' do
+      expect(@tree.sorted_array[6]).to eq({'Mission Impossible' => 50})
+    end
+    it 'will record the eighth value' do
+      expect(@tree.sorted_array[7]).to eq({'A Song to Remember' => 70})
+    end
+    it 'will record the ninth value' do
+      expect(@tree.sorted_array[8]).to eq({'A Beautiful Mind' => 80})
     end
   end
 end
