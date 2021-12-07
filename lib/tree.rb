@@ -1,9 +1,12 @@
 class BinarySearchTree
-  attr_reader :root, :all_nodes, :sorted_array
+  attr_reader :root, :all_nodes, :sorted_array, :change_in_depth, :initial_node
   def initialize()
     @root = nil
     @size = 0
     @all_nodes = []
+    @change_in_depth
+    @sorted_array_raw = []
+    @initial_node = initial_node
   end
 
   def insert(value, movie)
@@ -73,30 +76,38 @@ class BinarySearchTree
     return previous_node
   end
 
+  def sorter(node)
+    @initial_node = node
+    until @sorted_array.length == 3
+      next_min = node
+      if next_min== nil
+        @initial_node = self.initial_node.parent
+        @sorted_array << {@initial_node.movie => @initial_node.value}
+      elsif next_min.left == nil #terminal point on left
+        @sorted_array << {next_min.movie => next_min.value}
+        @sorted_array_raw << next_min
+        node = next_min.right
+      elsif node.left != nil #if nodes to left
+        next_min = node.left
+        if next_min.left == nil # terminal on left
+          @sorted_array << {next_min.movie => next_min.value}
+          @sorted_array_raw << next_min
+          node = next_min.right
+        elsif next_min.left != nil
+          node = next_min.left
+        end
+      end
+    end
+
+
+  end
+
   def sort
     min
     @sorted_array = []
-    @sorted_array << {min.movie => min.value}
-    lower_node = min.right # start with right since no values left of min
-    while lower_node != nil  #values below, cant be values to left of min
-      next_min = lower_node
-      if next_min.left == nil #terminal point on left
-        @sorted_array << {next_min.movie => next_min.value}
-        lower_node = next_min.right
-        # continue to check right
-      elsif lower_node.left != nil #if nodes to left
-        next_min = lower_node.left
-        if next_min.left == nil # terminal on left
-          @sorted_array << {next_min.movie => next_min.value}
-          lower_node = next_min.right
-        elsif next_min.left != nil
-          next_min = next_min.right
-          @sorted_array << {next_min.movie => next_min.value}
-          lower_node = next_min.left #how do I automate this?
-        end
-      end
+    sorter(min)
+    # sorter(min.parent)
     return @sorted_array
-    end
 
   end
 end
