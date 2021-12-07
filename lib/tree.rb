@@ -78,14 +78,16 @@ class BinarySearchTree
 
   def sorter(node)
     @initial_node = node
-    until @sorted_array.length == 3
+    until @sorted_array.length == 8
       next_min = node
       if next_min== nil
         @initial_node = self.initial_node.parent
-        @sorted_array << {@initial_node.movie => @initial_node.value}
+        node = @initial_node
+      elsif next_min == @initial_node
+        @sorted_array << {node.movie => node.value}
+        node = next_min.right
       elsif next_min.left == nil #terminal point on left
         @sorted_array << {next_min.movie => next_min.value}
-        @sorted_array_raw << next_min
         node = next_min.right
       elsif node.left != nil #if nodes to left
         next_min = node.left
@@ -98,8 +100,6 @@ class BinarySearchTree
         end
       end
     end
-
-
   end
 
   def sort
@@ -108,6 +108,5 @@ class BinarySearchTree
     sorter(min)
     # sorter(min.parent)
     return @sorted_array
-
   end
 end
